@@ -33,9 +33,7 @@ pipeline {
 
         stage('Docker Build') {
                     steps {
-                        sh '''
-                            docker build -t tdd-spring-boot:latest .
-                        '''
+                        sh 'docker build -t tdd-spring-boot:latest .'
                     }
                 }
     }
