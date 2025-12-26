@@ -1,8 +1,9 @@
 pipeline {
-    agent any
-
-    tools {
-        maven 'Maven'
+    agent {
+        docker {
+            image 'maven:3.9.9-eclipse-temurin-21' // container with Maven
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
     }
 
     stages {
@@ -32,10 +33,10 @@ pipeline {
         }
 
         stage('Docker Build') {
-                    steps {
-                        sh 'docker build -t tdd-spring-boot:latest .'
-                    }
-                }
+            steps {
+                sh 'docker build -t tdd-spring-boot:latest .'
+            }
+        }
     }
 
     post {
